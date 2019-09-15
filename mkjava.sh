@@ -1,6 +1,12 @@
 #!/bin/bash
 # create new executable bash script and open in vi
-
+if [[ "$OSTYPE" == "linux-gnu" ]]
+then
+    vimVersion="gvim"
+elif [[ "$OSTYPE" == "darwin"* ]]
+then
+    vimVersion="mvim"
+fi
 # check if filename was passed, else set to default value
 if [ $1 ]
 then
@@ -15,7 +21,7 @@ classname=$( basename $filename .java )
 # If file doesn't exist, create it 
 if [ ! -s $filename ]
 then
-    cp /Users/barrymolina/.scripts/mkjava/ClassName.java $filename
+    cp ~/.scripts/mkjava/ClassName.java $filename
 else
     echo "File $filename exists"
     exit 0
@@ -28,4 +34,4 @@ then
     mv $filename.new $filename
 fi
 
-mvim $filename
+$vimVersion $filename
