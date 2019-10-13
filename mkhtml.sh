@@ -1,5 +1,13 @@
 #!/bin/bash
 
+if [[ "$OSTYPE" == "linux-gnu" ]]
+then
+    vimVersion="gvim"
+elif [[ "$OSTYPE" == "darwin"* ]]
+then
+    vimVersion="mvim"
+fi
+
 if [ $# -gt 0 ]
 then
     filename=$1
@@ -9,9 +17,10 @@ fi
 
 if [ ! -s $filename ]
 then
-    cp /Users/barrymolina/.scripts/mkhtml/htmlfoundation $filename
+    cp ~/.scripts/mkhtml/htmlfoundation $filename
 fi
 
-mvim $filename
+$vimVersion $filename
+
 
 
